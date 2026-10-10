@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1740" />
+  <title>Carpenter & Helper Jobs | Dharmendra Carpenter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1740;
+      --blue: #1267c5;
+      --cyan: #16a4c8;
+      --text: #17213b;
+      --muted: #5f6e86;
+      --line: #dce4ef;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background: #f3f6fb;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .contact-strip {
+      background: var(--navy);
+      color: #e8f2ff;
+      font-size: 0.82rem;
+    }
+
+    .contact-strip-inner {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+    }
+
+    a { color: inherit; }
+
+    .contact-strip a {
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--navy);
+      border-bottom: 3px solid var(--cyan);
+      box-shadow: 0 8px 22px rgba(9, 24, 60, 0.18);
+    }
+
+    .topbar-inner {
+      display: flex;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--navy);
+    }
+
+    .brand-logo {
+      display: block;
+      width: 54px;
+      height: 54px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .language-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 5px;
+      background: rgba(255,255,255,0.08);
+      color: #d8e5f6;
+      font-size: 0.84rem;
+    }
+
+    .language-picker select {
+      max-width: 150px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #fff;
+      color-scheme: light;
+      font: inherit;
+    }
+
+    .language-picker option {
+      color: var(--text);
+      background: #fff;
+    }
+
+    .language-status,
+    .translation-widget { display: none; }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #0c54a7;
+    }
+
+    main { padding: 46px 0 60px; }
+
+    .intro {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-left: 4px solid var(--cyan);
+      background: #e7f4fb;
+      color: #12629a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      color: #112047;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.045em;
+      line-height: 1.12;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .career-card {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: start;
+      padding: 26px;
+      border: 1px solid #cfe4f1;
+      border-top: 3px solid var(--cyan);
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(23, 53, 91, 0.08);
+    }
+
+    .career-copy h2 {
+      margin: 0 0 12px;
+      color: #14264b;
+      font-size: 1.5rem;
+    }
+
+    .career-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .career-copy ul {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      color: var(--muted);
+      list-style: none;
+    }
+
+    .career-copy li::before {
+      margin-right: 9px;
+      color: #1384b7;
+      content: "✓";
+      font-weight: 800;
+    }
+
+    .worker-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field.full-width { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cdd9e7;
+      border-radius: 5px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: #8a97a9; }
+
+    .form-field select:invalid { color: #8a97a9; }
+
+    .form-field textarea {
+      min-height: 116px;
+      resize: vertical;
+    }
+
+    .worker-form .button { justify-self: start; }
+
+    .form-note {
+      align-self: center;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 22px 0;
+      border-top: 1px solid rgba(255,255,255,0.14);
+      background: var(--navy);
+      color: #c2d1e7;
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    footer a { color: #fff; }
+
+    @media (max-width: 800px) {
+      .career-card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .contact-strip-inner { justify-content: center; gap: 12px; font-size: 0.72rem; }
+      .topbar-inner { flex-wrap: wrap; justify-content: center; padding: 12px 0; }
+      .header-links { width: 100%; justify-content: center; }
+      .language-picker { flex: 1; justify-content: space-between; }
+      .language-picker select { max-width: 65%; }
+      main { padding: 34px 0 44px; }
+      .career-card { padding: 18px; }
+      .worker-form { grid-template-columns: 1fr; }
+      .form-field.full-width { grid-column: auto; }
+      .worker-form .button { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-strip">
+    <div class="container contact-strip-inner">
+      <a href="https://wa.me/917002053060">WhatsApp: +91 70020 53060</a>
+      <a href="tel:+917002053060">Call: +91 70020 53060</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="firstweb.html">
+        <img class="brand-logo" src="assets/dharmendra-carpenter-logo.png" alt="Dharmendra Carpenter logo" />
+        <span>Dharmendra Carpenter</span>
+      </a>
+      <div class="header-links">
+        <label class="language-picker" for="language-select">
+          <span>Language</span>
+          <select id="language-select" aria-label="Choose page language">
+            <option value="en">English</option>
+            <option value="as">অসমীয়া</option>
+            <option value="bn">বাংলা</option>
+            <option value="brx">बड़ो</option>
+            <option value="doi">डोगरी</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="ks">کٲشُر</option>
+            <option value="kok">कोंकणी</option>
+            <option value="mai">मैथिली</option>
+            <option value="ml">മലയാളം</option>
+            <option value="mni-Mtei">ꯃꯤꯇꯩꯂꯣꯟ</option>
+            <option value="mr">मराठी</option>
+            <option value="ne">नेपाली</option>
+            <option value="or">ଓଡ଼ିଆ</option>
+            <option value="pa">ਪੰਜਾਬੀ</option>
+            <option value="sa">संस्कृतम्</option>
+            <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ</option>
+            <option value="sd">سنڌي</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+            <option value="ur">اردو</option>
+          </select>
+        </label>
+        <span id="language-status" class="language-status" role="status" aria-live="polite"></span>
+        <a class="button" href="firstweb.html">Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="intro">
+      <span class="eyebrow">Careers · Carpentry Work</span>
+      <h1>Join our Carpenter &amp; Helper team</h1>
+      <p>Looking for carpentry work? Share your details and experience. We’ll contact you when a suitable opportunity is available.</p>
+    </div>
+
+    <section class="career-card" aria-labelledby="application-heading">
+      <div class="career-copy">
+        <h2 id="application-heading">Apply to work with us</h2>
+        <p>This page is only for people looking for work as a carpenter or helper. Customer project enquiries are on the main website.</p>
+        <ul>
+          <li>Choose Carpenter or Helper</li>
+          <li>Tell us your address, city and work experience</li>
+          <li>Send your application directly through WhatsApp</li>
+        </ul>
+      </div>
+
+      <form class="worker-form" id="worker-form">
+        <div class="form-field">
+          <label for="worker-name">Full name *</label>
+          <input id="worker-name" name="name" type="text" autocomplete="name" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-phone">Mobile number *</label>
+          <input id="worker-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{10,13}" placeholder="Enter your mobile number" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-address">Current address / area *</label>
+          <input id="worker-address" name="address" type="text" autocomplete="street-address" placeholder="House or flat, street, area or locality" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-landmark">Nearby landmark (optional)</label>
+          <input id="worker-landmark" name="landmark" type="text" placeholder="Enter a nearby landmark" />
+        </div>
+        <div class="form-field">
+          <label for="worker-city">City or town *</label>
+          <input id="worker-city" name="city" type="text" autocomplete="address-level2" placeholder="Enter your city or town" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-state">State or Union Territory *</label>
+          <input id="worker-state" name="state" type="text" autocomplete="address-level1" placeholder="Enter your state or UT" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-pincode">PIN code *</label>
+          <input id="worker-pincode" name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[1-9][0-9]{5}" maxlength="6" placeholder="6-digit PIN code" required />
+        </div>
+        <div class="form-field">
+          <label for="worker-aadhaar">Aadhaar number (optional)</label>
+          <input id="worker-aadhaar" name="aadhaar" type="password" inputmode="numeric" autocomplete="off" pattern="[0-9]{12}" minlength="12" maxlength="12" placeholder="12-digit Aadhaar number" />
+          <small>For in-person identity verification only. This number is not sent on WhatsApp or stored by this website.</small>
+        </div>
+        <div class="form-field">
+          <label for="worker-role">Work role *</label>
+          <select id="worker-role" name="role" required>
+            <option value="" disabled selected>Select your role</option>
+            <option>Carpenter</option>
+            <option>Helper</option>
+          </select>
+        </div>
+        <div class="form-field full-width">
+          <label for="worker-experience">Experience and other details (optional)</label>
+          <textarea id="worker-experience" name="experience" placeholder="Describe your work experience, skills and availability."></textarea>
+        </div>
+        <button class="button" type="submit">Apply for work on WhatsApp</button>
+        <p class="form-note">WhatsApp will open with your application details. Aadhaar is not included. Review the message and tap Send to apply.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© Dharmendra Carpenter · Carpenter and helper applications</span>
+      <a href="firstweb.html">Return to the main website</a>
+    </div>
+  </footer>
+
+  <div id="google_translate_element" class="translation-widget" aria-hidden="true"></div>
+  <script>
+    const languagePicker = document.getElementById("language-select");
+    const languageStatus = document.getElementById("language-status");
+    const indianLanguages = Array.from(languagePicker.options)
+      .map((option) => option.value)
+      .filter((language) => language !== "en");
+
+    function connectLanguagePicker() {
+      const googlePicker = document.querySelector("#google_translate_element select.goog-te-combo");
+      if (!googlePicker || googlePicker.options.length <= 1) {
+        languageStatus.textContent = "Language translation could not be loaded. Please refresh and try again.";
+        languagePicker.disabled = true;
+        return;
+      }
+
+      let unavailableCount = 0;
+      Array.from(languagePicker.options).forEach((option) => {
+        if (option.value !== "en" && !Array.from(googlePicker.options).some((supported) => supported.value === option.value)) {
+          option.disabled = true;
+          option.textContent += " (not available)";
+          unavailableCount += 1;
+        }
+      });
+
+      languageStatus.textContent = unavailableCount
+        ? `${unavailableCount} selected languages are not currently supported by Google Translate.`
+        : "";
+      languagePicker.addEventListener("change", () => {
+        const language = languagePicker.value;
+        if (language === "en") {
+          window.location.reload();
+          return;
+        }
+
+        document.documentElement.lang = language;
+        document.documentElement.dir = ["ks", "sd", "ur"].includes(language) ? "rtl" : "ltr";
+        googlePicker.value = language;
+        googlePicker.dispatchEvent(new Event("change"));
+      });
+    }
+
+    window.googleTranslateElementInit = function () {
+      new google.translate.TranslateElement({
+        pageLanguage: "en",
+        includedLanguages: indianLanguages.join(","),
+        autoDisplay: false
+      }, "google_translate_element");
+
+      let attempts = 0;
+      const pickerCheck = window.setInterval(() => {
+        attempts += 1;
+        const googlePicker = document.querySelector("#google_translate_element select.goog-te-combo");
+        if (googlePicker && googlePicker.options.length > 1) {
+          window.clearInterval(pickerCheck);
+          connectLanguagePicker();
+        } else if (attempts >= 50) {
+          window.clearInterval(pickerCheck);
+          connectLanguagePicker();
+        }
+      }, 100);
+    };
+
+    const translateScript = document.createElement("script");
+    translateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    translateScript.onerror = () => {
+      languageStatus.textContent = "Language translation could not be loaded. Please refresh and try again.";
+      languagePicker.disabled = true;
+    };
+    document.head.appendChild(translateScript);
+
+    document.getElementById("worker-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const fieldLabel = (id) => form.querySelector(`label[for="${id}"]`).innerText.replace(/\s*\*$/, "").trim();
+      const message = [
+        "Job application - Carpenter / Helper",
+        `${fieldLabel("worker-name")}: ${formData.get("name")}`,
+        `${fieldLabel("worker-phone")}: ${formData.get("phone")}`,
+        `Current address / area: ${formData.get("address")}`,
+        formData.get("landmark") ? `Nearby landmark: ${formData.get("landmark")}` : "",
+        `${fieldLabel("worker-city")}: ${formData.get("city")}`,
+        `${fieldLabel("worker-state")}: ${formData.get("state")}`,
+        `${fieldLabel("worker-pincode")}: ${formData.get("pincode")}`,
+        `${fieldLabel("worker-role")}: ${form.querySelector('[name="role"]').selectedOptions[0].innerText.trim()}`,
+        formData.get("experience") ? `${fieldLabel("worker-experience")}: ${formData.get("experience")}` : ""
+      ].join("\n");
+      const whatsappUrl = `https://wa.me/917002053060?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>

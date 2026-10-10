@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dharmendra Carpenter | All India Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1325;
+      --bg-soft: #171f35;
+      --card: rgba(17, 25, 40, 0.7);
+      --card-strong: rgba(29, 38, 58, 0.9);
+      --text: #edf6ff;
+      --muted: #bfd0e8;
+      --primary: #ffb347;
+      --primary-2: #ff7e5f;
+      --accent: #6ee7b7;
+      --purple: #a78bfa;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 179, 71, 0.35), transparent 24%),
+        radial-gradient(circle at right center, rgba(107, 70, 193, 0.4), transparent 23%),
+        radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.25), transparent 25%),
+        linear-gradient(135deg, #0b1020 0%, #111827 35%, #1a1d2d 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(18px);
+      opacity: 0.8;
+      pointer-events: none;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one { width: 240px; height: 240px; background: rgba(255, 158, 67, 0.4); left: 6%; top: 12%; }
+    .orb.two { width: 280px; height: 280px; background: rgba(139, 92, 246, 0.28); right: 8%; top: 16%; animation-delay: 1s; }
+    .orb.three { width: 220px; height: 220px; background: rgba(52, 211, 153, 0.22); left: 40%; bottom: 8%; animation-delay: 2s; }
+
+    @keyframes float {
+      from { transform: translateY(0) scale(1); }
+      to { transform: translateY(-18px) scale(1.08); }
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(13, 19, 37, 0.58);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #1a1208;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(255, 166, 77, 0.5);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .language-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .language-picker select {
+      max-width: 190px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .language-picker option {
+      color: var(--text);
+      background: #171f35;
+    }
+
+    .language-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .translation-widget {
+      display: none;
+    }
+
+    .pill,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+
+    .button {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #20160d;
+      border: none;
+      box-shadow: 0 15px 30px rgba(255, 162, 79, 0.35);
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 38px;
+      padding: 56px 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(110, 231, 183, 0.12);
+      border: 1px solid rgba(110, 231, 183, 0.35);
+      color: #b7f3d6;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.96;
+      margin: 0 0 18px;
+      letter-spacing: -0.06em;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffd985 0%, #ff9b5e 54%, #f27af0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .stat {
+      min-width: 140px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 3px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .visual-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .visual-box {
+      padding: 12px;
+      border-radius: 24px;
+      background: rgba(18, 21, 34, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .visual-box img {
+      display: block;
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 18px;
+      filter: saturate(1.08) contrast(1.06);
+    }
+
+    .floating-badge {
+      position: absolute;
+      right: -12px;
+      bottom: 26px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(11, 16, 32, 0.88);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      transform: translateY(0);
+      animation: floatCard 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatCard {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    .badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,179,71,0.28), rgba(167,139,250,0.3));
+      color: #ffd58d;
+      font-size: 1.2rem;
+    }
+
+    .section {
+      position: relative;
+      z-index: 1;
+      padding: 30px 0 20px;
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin: 0 0 10px;
+      letter-spacing: -0.05em;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px 22px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    }
+
+    .icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,179,71,0.2), rgba(168,85,247,0.18));
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.38rem;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    .featured-showcase {
+      padding-top: 8px;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .featured-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,179,71,0.4);
+    }
+
+    .featured-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .featured-card-body {
+      padding: 16px 16px 18px;
+    }
+
+    .featured-label {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,179,71,0.12);
+      color: #ffd58d;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .featured-card h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    .work-card {
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,179,71,0.4);
+    }
+
+    .work-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .work-card-content {
+      padding: 18px 20px 22px;
+    }
+
+    .work-category {
+      display: inline-block;
+      margin-bottom: 9px;
+      color: #ffd58d;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .work-card h3 {
+      margin: 0 0 9px;
+      font-size: 1.2rem;
+    }
+
+    .work-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .info-panel,
+    .feature-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .info-panel {
+      background: linear-gradient(180deg, rgba(255,179,71,0.08), rgba(255,255,255,0.03));
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature-list li {
+      display: flex;
+      gap: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      align-items: flex-start;
+    }
+
+    .check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(110, 231, 183, 0.14);
+      color: #8af0c8;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .cta-box {
+      margin-top: 28px;
+      padding: 30px 26px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255,179,71,0.09), rgba(167,139,250,0.12), rgba(110,231,183,0.08));
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-box h3 {
+      margin: 0 0 6px;
+      font-size: clamp(1.6rem, 2vw, 2.2rem);
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 22px;
+      align-items: start;
+      margin-top: 24px;
+    }
+
+    .contact-intro,
+    .contact-form {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-intro h3 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+    }
+
+    .contact-intro p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field[hidden] { display: none; }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(11,16,32,0.62);
+      color: var(--text);
+      font: inherit;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: #91a2ba;
+    }
+
+    .form-field select:invalid {
+      color: #91a2ba;
+    }
+
+    .form-field select option {
+      color: var(--text);
+      background: #171f35;
+    }
+
+    .form-field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-form .button {
+      justify-self: start;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    .form-note {
+      align-self: center;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .about-wrap,
+      .services-grid,
+      .work-grid,
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-layout { grid-template-columns: 1fr; }
+      .visual-box img { height: 420px; }
+      .cta-box { align-items: flex-start; }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      .topbar-inner { padding: 8px 0; }
+      .brand { font-size: 0.88rem; }
+      .nav-right { gap: 8px; }
+      .pill, .button { width: 100%; }
+      .language-picker { width: 100%; justify-content: space-between; }
+      .language-picker select { max-width: 70%; }
+      .cta-row { flex-direction: column; }
+      .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .floating-badge { right: 12px; bottom: 18px; }
+      .contact-form { grid-template-columns: 1fr; padding: 20px; }
+      .form-field.full-width { grid-column: auto; }
+      .contact-form .button { justify-self: stretch; }
+    }
+
+    :root {
+      --bg: #f3f6fb;
+      --bg-soft: #eaf0f8;
+      --card: #ffffff;
+      --card-strong: #ffffff;
+      --text: #17213b;
+      --muted: #5f6e86;
+      --primary: #1464c4;
+      --primary-2: #10a7d1;
+      --accent: #13a7c8;
+      --purple: #3971c6;
+      --line: #dce4ef;
+      --shadow: 0 14px 36px rgba(17, 44, 86, 0.12);
+    }
+
+    body {
+      color: var(--text);
+      background: #f3f6fb;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    body::before,
+    .orb { display: none; }
+
+    .container { width: min(1240px, calc(100% - 40px)); }
+
+    .contact-strip {
+      background: #10234e;
+      color: #e8f2ff;
+      font-size: 0.82rem;
+    }
+
+    .contact-strip-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+    }
+
+    .contact-strip a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      background: #0b1740;
+      border-bottom: 3px solid #1a9ec6;
+      box-shadow: 0 8px 22px rgba(9, 24, 60, 0.18);
+      backdrop-filter: none;
+    }
+
+    .topbar-inner {
+      min-height: 82px;
+      gap: 24px;
+    }
+
+    .brand {
+      color: #fff;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      background: #fff;
+      color: #0b1740;
+      border-radius: 50%;
+      box-shadow: none;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 58px;
+      height: 58px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(14px, 2vw, 28px);
+      flex: 1;
+    }
+
+    .main-nav a {
+      color: #edf4ff;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .main-nav a:hover { color: #64d5f4; }
+
+    .nav-right {
+      justify-content: flex-end;
+      gap: 9px;
+    }
+
+    .language-picker {
+      padding: 7px 9px;
+      background: rgba(255,255,255,0.08);
+      color: #d8e5f6;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .language-picker select {
+      color: #fff;
+      color-scheme: light;
+      max-width: 120px;
+    }
+
+    .language-picker select option {
+      color: #17213b;
+      background-color: #fff;
+    }
+
+    .language-status { color: #d7e5fa; }
+
+    .pill,
+    .button {
+      border-radius: 5px;
+      padding: 11px 16px;
+      font-size: 0.87rem;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .pill {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      white-space: nowrap;
+    }
+
+    .button {
+      color: #fff;
+      background: #1267c5;
+      box-shadow: none;
+    }
+
+    .button:hover {
+      background: #0c54a7;
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      color: #155bab;
+      background: #fff;
+      border: 1px solid #cbd9ea;
+    }
+
+    .hero {
+      grid-template-columns: 1fr 0.95fr;
+      gap: 48px;
+      padding: 58px 0 50px;
+    }
+
+    .eyebrow {
+      padding: 8px 12px;
+      border-radius: 3px;
+      background: #e7f4fb;
+      border: 0;
+      border-left: 4px solid #16a4c8;
+      color: #12629a;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      color: #112047;
+      font-size: clamp(2.7rem, 4.5vw, 4.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .highlight {
+      background: none;
+      color: #147ac0;
+      -webkit-text-fill-color: #147ac0;
+    }
+
+    .lead {
+      color: #5d6c83;
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .cta-row { gap: 12px; }
+
+    .stat {
+      min-width: 128px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #dce5f0;
+      box-shadow: 0 7px 20px rgba(24, 57, 99, 0.06);
+      backdrop-filter: none;
+    }
+
+    .stat strong { color: #145cae; }
+    .stat span { color: #62718a; }
+
+    .visual-card {
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 8px;
+      background: #dce9f4;
+      box-shadow: 0 18px 38px rgba(15, 42, 78, 0.18);
+      backdrop-filter: none;
+    }
+
+    .visual-box {
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .visual-box img {
+      height: 465px;
+      border-radius: 0;
+      filter: none;
+      object-fit: cover;
+    }
+
+    .floating-badge {
+      right: 18px;
+      bottom: 18px;
+      border: 0;
+      border-radius: 6px;
+      background: #fff;
+      color: #17213b;
+      box-shadow: 0 8px 24px rgba(9, 24, 60, 0.18);
+      animation: none;
+    }
+
+    .badge-icon {
+      border-radius: 6px;
+      background: #e7f4fb;
+      color: #176db0;
+    }
+
+    .section {
+      padding: 50px 0;
+      border-top: 1px solid #e2e9f2;
+      scroll-margin-top: 190px;
+    }
+
+    .section-header {
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .section-header h2 {
+      color: #122148;
+      font-size: clamp(1.85rem, 3vw, 2.55rem);
+      letter-spacing: -0.035em;
+    }
+
+    .section-header p {
+      color: #63728a;
+      line-height: 1.65;
+    }
+
+    .services-grid,
+    .work-grid { gap: 20px; }
+
+    .service-card,
+    .work-card {
+      border: 1px solid #e0e8f2;
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(23, 53, 91, 0.07);
+    }
+
+    .service-card {
+      border-top: 3px solid #1686c2;
+      padding: 22px;
+    }
+
+    .service-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-link:hover,
+    .service-link:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(23, 53, 91, 0.14);
+    }
+
+    .service-link:focus-visible {
+      outline: 3px solid #1686c2;
+      outline-offset: 3px;
+    }
+
+    .service-link-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      color: #1768ad;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #e9f4fb;
+      color: #125e9b;
+    }
+
+    .service-card h3,
+    .work-card h3,
+    .contact-intro h3 { color: #14264b; }
+
+    .service-card p,
+    .work-card p { color: #62718a; }
+
+    .work-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      border-color: #b7d6ec;
+      box-shadow: 0 13px 28px rgba(23, 53, 91, 0.12);
+    }
+
+    .work-card img { aspect-ratio: 16 / 9; }
+
+    .work-category {
+      color: #1775ad;
+      letter-spacing: 0.06em;
+    }
+
+    .info-panel,
+    .feature-panel,
+    .contact-intro,
+    .contact-form {
+      border: 1px solid #e0e8f2;
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(23, 53, 91, 0.06);
+    }
+
+    .info-panel {
+      border-top: 3px solid #1686c2;
+      background: #fff;
+    }
+
+    .feature-list li { color: #5d6c83; }
+
+    .check {
+      border-radius: 5px;
+      background: #e8f4fb;
+      color: #126cb0;
+    }
+
+    .contact-intro { border-top: 3px solid #1686c2; }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      border: 1px solid #cdd9e7;
+      border-radius: 5px;
+      background: #fff;
+      color: #17213b;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: #8a97a9; }
+
+    .form-field select:invalid { color: #8a97a9; }
+
+    .form-field select option {
+      color: #17213b;
+      background: #fff;
+    }
+
+    .form-note { color: #62718a; }
+
+    .site-footer {
+      margin-top: 20px;
+      background: #0b1740;
+      color: #dce8f8;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 34px;
+      padding: 44px 0 36px;
+    }
+
+    .footer-column h2,
+    .footer-column h3 {
+      margin: 0 0 16px;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .footer-column p,
+    .footer-column a {
+      color: #c2d1e7;
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .footer-column p { margin: 0 0 10px; }
+
+    .footer-column ul {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-column a {
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-column a:hover { color: #55d0ef; }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .footer-brand .brand-mark {
+      width: 36px;
+      height: 36px;
+    }
+
+    .footer-bottom {
+      padding: 15px 0;
+      border-top: 1px solid rgba(255,255,255,0.14);
+      color: #aebfda;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 1050px) {
+      .topbar-inner { flex-wrap: wrap; padding: 12px 0; }
+      .main-nav { order: 3; flex-basis: 100%; }
+      .nav-right { margin-left: auto; }
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr 1fr; }
+      .visual-box img { height: 420px; }
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: min(100% - 28px, 1240px); }
+      .contact-strip-inner { justify-content: center; gap: 12px; font-size: 0.72rem; }
+      .topbar-inner { justify-content: center; gap: 10px; }
+      .main-nav { gap: 10px 16px; flex-wrap: wrap; }
+      .main-nav a { font-size: 0.72rem; }
+      .nav-right { width: 100%; justify-content: center; }
+      .nav-right > .pill,
+      .nav-right > .button { width: auto; }
+      .language-picker { width: auto; }
+      .hero { grid-template-columns: 1fr; gap: 24px; padding: 38px 0; }
+      h1 { font-size: clamp(2.45rem, 12vw, 3.2rem); }
+      .visual-box img { height: 340px; }
+      .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+      .stat { min-width: 0; padding: 13px 10px; }
+      .stat strong { font-size: 1.25rem; }
+      .section { padding: 36px 0; }
+      .services-grid,
+      .work-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; padding: 34px 0; }
+      .contact-form { grid-template-columns: 1fr; }
+      .form-field.full-width { grid-column: auto; }
+      .contact-form .button { justify-self: stretch; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <div class="contact-strip">
+    <div class="container contact-strip-inner">
+      <a href="https://wa.me/917002053060">WhatsApp: +91 70020 53060</a>
+      <a href="tel:+917002053060">Call: +91 70020 53060</a>
+      <span>All India Carpenter Service</span>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img class="brand-logo" src="assets/dharmendra-carpenter-logo.png" alt="Dharmendra Carpenter logo" />
+        <span>Dharmendra Carpenter</span>
+      </div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#work">Our Work</a>
+        <a href="#contact">Contact</a>
+        <a href="career.html">Join Our Team</a>
+      </nav>
+      <div class="nav-right">
+        <label class="language-picker" for="language-select">
+          <span>Language</span>
+          <select id="language-select" aria-describedby="language-status">
+            <option value="en">English</option>
+            <option value="as">অসমীয়া</option>
+            <option value="bn">বাংলা</option>
+            <option value="brx">बड़ो</option>
+            <option value="doi">डोगरी</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="ks">کٲشُر</option>
+            <option value="kok">कोंकणी</option>
+            <option value="mai">मैथिली</option>
+            <option value="ml">മലയാളം</option>
+            <option value="mni-Mtei">ꯃꯤꯇꯩꯂꯣꯟ</option>
+            <option value="mr">मराठी</option>
+            <option value="ne">नेपाली</option>
+            <option value="or">ଓଡ଼ିଆ</option>
+            <option value="pa">ਪੰਜਾਬੀ</option>
+            <option value="sa">संस्कृतम्</option>
+            <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ</option>
+            <option value="sd">سنڌي</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+            <option value="ur">اردو</option>
+          </select>
+        </label>
+        <span class="language-status" id="language-status" role="status" aria-live="polite"></span>
+        <a class="pill" href="tel:+917002053060">☎ +91 70020 53060</a>
+        <a class="button" href="#contact">Book a Visit</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">● All India Service</div>
+        <h1>Crafting <span class="highlight">beautiful spaces</span> with precision and wood.</h1>
+        <p class="lead">
+          We design and build premium wooden furniture, modular kitchens, wardrobes, and custom interior woodwork with strong craftsmanship, long-lasting quality, and reliable service across India.
+        </p>
+
+        <div class="cta-row">
+          <a href="#contact" class="button">Get Free Quote</a>
+          <a href="tel:+917002053060" class="button secondary">Call Now</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>10+</strong>
+            <span>Years Craft</span>
+          </div>
+          <div class="stat">
+            <strong>2500+</strong>
+            <span>Projects</span>
+          </div>
+          <div class="stat">
+            <strong>24/7</strong>
+            <span>Support</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="visual-card">
+        <div class="visual-box">
+          <img src="assets/modular-kitchen.png" alt="Custom wooden kitchen cabinets by Dharmendra Carpenter" />
+        </div>
+        <div class="floating-badge">
+          <div class="badge-icon">★</div>
+          <div>
+            <strong>Trusted</strong><br />
+            <small>Handmade Interiors</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section featured-showcase" id="featured-work">
+      <div class="section-header">
+        <h2>Recent Completed Work</h2>
+        <p>Some of our latest customer projects that visitors see immediately when they open the site.</p>
+      </div>
+
+      <div class="featured-grid">
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Modern modular kitchen with wooden cabinets" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Kitchen</span>
+            <h3>Luxury Modular Kitchen</h3>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Wooden office workstation with cabinets" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Office</span>
+            <h3>Smart Workstation</h3>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Wooden dining table and chairs" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Dining</span>
+            <h3>Elegant Dining Setup</h3>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80" alt="Study storage unit with wooden shelves and cabinets" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Storage</span>
+            <h3>Custom Study Unit</h3>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80" alt="Premium wooden wardrobe and bedroom cabinetry" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Bedroom</span>
+            <h3>Wardrobe Wall Design</h3>
+          </div>
+        </article>
+
+        <article class="featured-card">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80" alt="Luxury wooden furniture and interior finishing" loading="lazy" />
+          <div class="featured-card-body">
+            <span class="featured-label">Interior</span>
+            <h3>Custom Home Woodwork</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2>Contact Us</h2>
+        <p>Tell us about the carpentry work you need, and we’ll get in touch.</p>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-intro">
+          <h3>Tell us about your project</h3>
+          <p>Enter your contact details and project site location, select a service and send your enquiry to us on WhatsApp.</p>
+        </div>
+        <form class="contact-form" id="customer-form">
+          <div class="form-field">
+            <label for="customer-name">Name *</label>
+            <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Enter your name" required />
+          </div>
+          <div class="form-field">
+            <label for="customer-phone">Mobile number *</label>
+            <input id="customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{10,13}" placeholder="Enter your mobile number" required />
+          </div>
+          <div class="form-field">
+            <label for="customer-address">Project site address / area *</label>
+            <input id="customer-address" name="address" type="text" autocomplete="street-address" placeholder="House or flat, street, area or locality" required />
+          </div>
+          <div class="form-field">
+            <label for="customer-landmark">Nearby landmark (optional)</label>
+            <input id="customer-landmark" name="landmark" type="text" placeholder="Enter a nearby landmark" />
+          </div>
+          <div class="form-field">
+            <label for="customer-city">City or town *</label>
+            <input id="customer-city" name="city" type="text" autocomplete="address-level2" placeholder="Enter your city or town" required />
+          </div>
+          <div class="form-field">
+            <label for="customer-state">State or Union Territory *</label>
+            <input id="customer-state" name="state" type="text" autocomplete="address-level1" placeholder="Enter your state or UT" required />
+          </div>
+          <div class="form-field">
+            <label for="customer-pincode">PIN code *</label>
+            <input id="customer-pincode" name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[1-9][0-9]{5}" maxlength="6" placeholder="6-digit PIN code" required />
+          </div>
+          <div class="form-field" id="service-field">
+            <label for="customer-service">Service required *</label>
+            <select id="customer-service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Modular Kitchen</option>
+              <option>Wardrobes & Beds</option>
+              <option>Office Desks & Workstations</option>
+              <option>Study Units & Storage</option>
+              <option>Dining Furniture</option>
+              <option>TV Units & Wall Panelling</option>
+              <option>Doors & Windows</option>
+              <option>Furniture Polishing & Restoration</option>
+              <option>Furniture Assembly & Installation</option>
+              <option>Complete Home Woodwork</option>
+              <option>Other Custom Carpentry</option>
+            </select>
+          </div>
+          <div class="form-field full-width">
+            <label for="customer-details">Project details (optional)</label>
+            <textarea id="customer-details" name="details" placeholder="Describe the furniture or woodwork you need. Include measurements or any other helpful details."></textarea>
+          </div>
+          <button class="button" type="submit">Send enquiry on WhatsApp</button>
+          <p class="form-note">WhatsApp will open with your details. Review the message and tap Send to submit it.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>Modern furniture, premium finishes, and tailor-made interiors.</p>
+      </div>
+
+      <div class="services-grid">
+        <a class="service-card service-link" href="modular-kitchen.html">
+          <div class="icon-wrap">🪵</div>
+          <h3>Modular Kitchen</h3>
+          <p>Functional, stylish, and durable kitchen interiors built for daily convenience and long-life performance.</p>
+          <span class="service-link-cta">View kitchen services <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" href="wardrobes-beds.html">
+          <div class="icon-wrap">🛏️</div>
+          <h3>Wardrobes & Beds</h3>
+          <p>Custom wardrobe systems and designer beds crafted to match your room, storage needs, and favorite style.</p>
+          <span class="service-link-cta">View wardrobes & beds <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" id="office-furniture" href="office-furniture.html">
+          <div class="icon-wrap">🪑</div>
+          <h3>Office Furniture & Workstations</h3>
+          <p>Custom office desks, workstations, cabinets, and storage designed for productive and organised workspaces.</p>
+          <span class="service-link-cta">View office furniture services <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" href="tv-units-paneling.html">
+          <div class="icon-wrap">📺</div>
+          <h3>TV Unit & Paneling</h3>
+          <p>Elegant wall paneling and entertainment units that bring sophistication and balance to your living spaces.</p>
+          <span class="service-link-cta">View TV units & panelling <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" href="doors-windows.html">
+          <div class="icon-wrap">🚪</div>
+          <h3>Doors & Windows</h3>
+          <p>Strong wooden doors and precision windows that combine beauty, safety, and complete interior harmony.</p>
+          <span class="service-link-cta">View doors & windows <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" href="polishing-restoration.html">
+          <div class="icon-wrap">✨</div>
+          <h3>Polishing & Restore</h3>
+          <p>Surface refinishing, color correction, and restoration that refreshes old furniture with premium finish quality.</p>
+          <span class="service-link-cta">View polishing & restoration <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="service-card service-link" href="complete-home-woodwork.html">
+          <div class="icon-wrap">🏠</div>
+          <h3>Full House Woodwork</h3>
+          <p>Complete interior woodwork solutions for homes, offices, hotels, and commercial spaces across India.</p>
+          <span class="service-link-cta">View complete woodwork <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="section-header">
+        <h2>Our Work by Category</h2>
+        <p>Explore furniture and woodwork examples grouped by the work they belong to.</p>
+      </div>
+
+      <div class="work-grid">
+        <article class="work-card">
+          <img src="assets/office-executive-desk.png" alt="Wooden executive office desk with drawers" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Office Furniture</span>
+            <h3>Executive Desks</h3>
+            <p>Made-to-fit office desks with practical drawers and durable wooden finishes.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <img src="assets/desk-assembly.png" alt="Carpenter assembling a wooden desk" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Assembly & Installation</span>
+            <h3>Furniture Fitting</h3>
+            <p>Careful on-site assembly and fitting for desks and custom furniture.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <img src="assets/study-storage-unit.png" alt="Study desk with matching shelves and storage cabinets" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Study & Storage</span>
+            <h3>Study Units</h3>
+            <p>Coordinated desks, shelving, and cabinets designed for study spaces.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <img src="assets/office-workstation.png" alt="Office workstation with storage cabinets and desktop shelves" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Office Furniture</span>
+            <h3>Workstations</h3>
+            <p>Functional workstations with integrated storage for offices and workspaces.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <img src="assets/dining-room.png" alt="Wooden dining table and chairs in a dining room" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Dining Furniture</span>
+            <h3>Dining Tables & Sets</h3>
+            <p>Warm wooden dining tables and seating for everyday family use.</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <img src="assets/modular-kitchen.png" alt="Wooden modular kitchen cabinets beside a dining area" loading="lazy" />
+          <div class="work-card-content">
+            <span class="work-category">Kitchen Woodwork</span>
+            <h3>Modular Kitchens</h3>
+            <p>Kitchen cabinetry and storage planned around the room and daily needs.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2>Why Choose Us</h2>
+        <p>Clean finishes, honest work, and reliable carpentry support.</p>
+      </div>
+
+      <div class="about-wrap">
+        <div class="info-panel">
+          <h3>Crafted for quality and trust</h3>
+          <p class="lead" style="margin: 12px 0 0; font-size: 0.98rem;">
+            Every project is planned carefully with quality materials, experienced workmanship, and on-site execution that keeps your space elegant and functional.
+          </p>
+        </div>
+
+        <div class="feature-panel">
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Premium woodwork with modern design ideas and practical storage layout.</li>
+            <li><span class="check">✓</span> Affordable pricing for home interiors, custom work, and renovation projects.</li>
+            <li><span class="check">✓</span> Fast installation and attention to detail for smooth final finishing.</li>
+            <li><span class="check">✓</span> Support across multiple cities with All India service coverage.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <div class="footer-brand">
+          <img class="brand-logo" src="assets/dharmendra-carpenter-logo.png" alt="Dharmendra Carpenter logo" />
+          <span>Dharmendra Carpenter</span>
+        </div>
+        <p>Custom furniture, interiors and reliable carpentry service for homes and businesses.</p>
+      </div>
+      <div class="footer-column">
+        <h2>Our Services</h2>
+        <ul>
+          <li><a href="#services">Modular Kitchens</a></li>
+          <li><a href="#services">Wardrobes & Beds</a></li>
+          <li><a href="office-furniture.html">Office Furniture</a></li>
+          <li><a href="#services">Home Woodwork</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#contact">Get a Free Estimate</a></li>
+          <li><a href="career.html">Join Our Team</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h2>Get in Touch</h2>
+        <ul>
+          <li><a href="tel:+917002053060">Call: +91 70020 53060</a></li>
+          <li><a href="https://wa.me/917002053060">WhatsApp us</a></li>
+          <li>Carpentry service across India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">© Dharmendra Carpenter. Custom woodwork made with care.</div>
+    </div>
+  </footer>
+  <div id="google_translate_element" class="translation-widget" aria-hidden="true"></div>
+  <script>
+    const languagePicker = document.getElementById("language-select");
+    const languageStatus = document.getElementById("language-status");
+    const indianLanguages = Array.from(languagePicker.options)
+      .map((option) => option.value)
+      .filter((language) => language !== "en");
+
+    function connectLanguagePicker() {
+      const googlePicker = document.querySelector("#google_translate_element select.goog-te-combo");
+      if (!googlePicker || googlePicker.options.length <= 1) {
+        languageStatus.textContent = "Language translation could not be loaded. Please refresh and try again.";
+        languagePicker.disabled = true;
+        return;
+      }
+
+      languagePicker.disabled = false;
+      let unavailableCount = 0;
+      Array.from(languagePicker.options).forEach((option) => {
+        if (option.value !== "en" && !Array.from(googlePicker.options).some((supported) => supported.value === option.value)) {
+          option.disabled = true;
+          option.textContent += " (not available)";
+          unavailableCount += 1;
+        }
+      });
+
+      const activeLanguage = googlePicker.value || "en";
+      languagePicker.value = activeLanguage;
+      document.documentElement.lang = activeLanguage;
+      document.documentElement.dir = ["ks", "sd", "ur"].includes(activeLanguage) ? "rtl" : "ltr";
+      languageStatus.textContent = unavailableCount
+        ? `${unavailableCount} selected languages are not currently supported by Google Translate.`
+        : "";
+      languagePicker.addEventListener("change", () => {
+        const language = languagePicker.value;
+        if (language === "en") {
+          window.location.reload();
+          return;
+        }
+
+        const activeGooglePicker = document.querySelector("#google_translate_element select.goog-te-combo");
+        if (!activeGooglePicker) {
+          languageStatus.textContent = "Language translation could not be loaded. Please refresh and try again.";
+          return;
+        }
+        document.documentElement.lang = language;
+        document.documentElement.dir = ["ks", "sd", "ur"].includes(language) ? "rtl" : "ltr";
+        activeGooglePicker.value = language;
+        activeGooglePicker.dispatchEvent(new Event("change"));
+      });
+    }
+
+    window.googleTranslateElementInit = function () {
+      new google.translate.TranslateElement({
+        pageLanguage: "en",
+        includedLanguages: indianLanguages.join(","),
+        autoDisplay: false
+      }, "google_translate_element");
+
+      let attempts = 0;
+      const pickerCheck = window.setInterval(() => {
+        attempts += 1;
+        const googlePicker = document.querySelector("#google_translate_element select.goog-te-combo");
+        if (googlePicker && googlePicker.options.length > 1) {
+          window.clearInterval(pickerCheck);
+          connectLanguagePicker();
+        } else if (attempts >= 50) {
+          window.clearInterval(pickerCheck);
+          connectLanguagePicker();
+        }
+      }, 100);
+    };
+
+    const translateScript = document.createElement("script");
+    translateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    translateScript.onerror = () => {
+      languageStatus.textContent = "Language translation could not be loaded. Please refresh and try again.";
+      languagePicker.disabled = true;
+    };
+    document.head.appendChild(translateScript);
+
+    document.getElementById("customer-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const fieldLabel = (id) => form.querySelector(`label[for="${id}"]`).innerText.replace(/\s*\*$/, "").trim();
+      const message = [
+        "New carpentry work enquiry",
+        `${fieldLabel("customer-name")}: ${formData.get("name")}`,
+        `${fieldLabel("customer-phone")}: ${formData.get("phone")}`,
+        "Project site address / area: " + formData.get("address"),
+        formData.get("landmark") ? `Nearby landmark: ${formData.get("landmark")}` : "",
+        `${fieldLabel("customer-city")}: ${formData.get("city")}`,
+        `${fieldLabel("customer-state")}: ${formData.get("state")}`,
+        `${fieldLabel("customer-pincode")}: ${formData.get("pincode")}`,
+        `${fieldLabel("customer-service")}: ${form.querySelector('[name="service"]').selectedOptions[0].innerText.trim()}`,
+        formData.get("details") ? `${fieldLabel("customer-details")}: ${formData.get("details")}` : ""
+      ].join("\n");
+      const whatsappUrl = `https://wa.me/917002053060?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+
+  </script>
+</body>
+</html>
