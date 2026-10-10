@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1740" />
+  <title>Office Furniture & Workstations | Dharmendra Carpenter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1740;
+      --blue: #1267c5;
+      --cyan: #16a4c8;
+      --text: #17213b;
+      --muted: #5f6e86;
+      --line: #dce4ef;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background: #f3f6fb;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .contact-strip {
+      background: var(--navy);
+      color: #e8f2ff;
+      font-size: 0.82rem;
+    }
+
+    .contact-strip-inner {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
+    }
+
+    .contact-strip a { text-decoration: none; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--navy);
+      border-bottom: 3px solid var(--cyan);
+      box-shadow: 0 8px 22px rgba(9, 24, 60, 0.18);
+    }
+
+    .topbar-inner {
+      display: flex;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--navy);
+    }
+
+    .brand-logo {
+      display: block;
+      width: 54px;
+      height: 54px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 5px;
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #0c54a7;
+    }
+
+    main { padding: 42px 0 60px; }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 38px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-left: 4px solid var(--cyan);
+      background: #e7f4fb;
+      color: #12629a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      color: #112047;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: -0.045em;
+      line-height: 1.1;
+    }
+
+    .intro-copy p,
+    .section-heading p,
+    .service-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .intro-copy p { margin: 0 0 22px; }
+
+    .intro-image {
+      display: block;
+      width: 100%;
+      max-height: 420px;
+      border-radius: 7px;
+      object-fit: cover;
+      box-shadow: 0 18px 38px rgba(15, 42, 78, 0.16);
+    }
+
+    .section-heading { margin-bottom: 22px; }
+
+    .section-heading h2 {
+      margin: 0 0 8px;
+      color: #122148;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      letter-spacing: -0.035em;
+    }
+
+    .section-heading p { margin: 0; }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .work-card {
+      overflow: hidden;
+      border: 1px solid #e0e8f2;
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(23, 53, 91, 0.07);
+    }
+
+    .work-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .work-card-content { padding: 18px 20px 20px; }
+
+    .work-card h3 {
+      margin: 0 0 8px;
+      color: #14264b;
+    }
+
+    .work-card p { margin: 0; }
+
+    .contact-section {
+      margin-top: 42px;
+      padding: 28px;
+      border: 1px solid #cfe4f1;
+      border-top: 3px solid var(--cyan);
+      border-radius: 7px;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(23, 53, 91, 0.08);
+      scroll-margin-top: 140px;
+    }
+
+    .contact-section h2 {
+      margin: 0 0 8px;
+      color: #14264b;
+    }
+
+    .contact-section > p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .enquiry-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field.full-width { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cdd9e7;
+      border-radius: 5px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: #8a97a9; }
+
+    .form-field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .enquiry-form .button { justify-self: start; }
+
+    .form-note {
+      align-self: center;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.14);
+      background: var(--navy);
+      color: #c2d1e7;
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    footer a { color: #fff; }
+
+    @media (max-width: 760px) {
+      .intro { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .contact-strip-inner { justify-content: center; gap: 12px; font-size: 0.72rem; }
+      .topbar-inner { min-height: 68px; }
+      main { padding: 32px 0 44px; }
+      .intro-image { max-height: 320px; }
+      .work-grid,
+      .enquiry-form { grid-template-columns: 1fr; }
+      .contact-section { padding: 20px; }
+      .form-field.full-width { grid-column: auto; }
+      .enquiry-form .button { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-strip">
+    <div class="container contact-strip-inner">
+      <a href="https://wa.me/917002053060">WhatsApp: +91 70020 53060</a>
+      <a href="tel:+917002053060">Call: +91 70020 53060</a>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="firstweb.html">
+        <img class="brand-logo" src="assets/dharmendra-carpenter-logo.png" alt="Dharmendra Carpenter logo" />
+        <span>Dharmendra Carpenter</span>
+      </a>
+      <a class="button" href="firstweb.html">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <div class="intro-copy">
+        <span class="eyebrow">Office Furniture · Custom Woodwork</span>
+        <h1>Office Furniture &amp; Workstations</h1>
+        <p>Make your workplace more organised and comfortable with custom-built desks, workstations, cabinets and storage. We plan each piece to suit your space and day-to-day work.</p>
+        <a class="button" href="#office-enquiry">Request an Office Furniture Quote</a>
+      </div>
+      <img class="intro-image" src="assets/office-workstation.png" alt="Custom office workstation with cabinets and storage" />
+    </section>
+
+    <section aria-labelledby="office-options-heading">
+      <div class="section-heading">
+        <h2 id="office-options-heading">Office furniture made for your workspace</h2>
+        <p>Choose individual pieces or discuss a coordinated office setup.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card">
+          <img src="assets/office-executive-desk.png" alt="Wooden executive office desk with drawers" loading="lazy" />
+          <div class="work-card-content">
+            <h3>Executive desks</h3>
+            <p>Practical wooden office desks with useful drawers and storage, sized to fit your room.</p>
+          </div>
+        </article>
+        <article class="work-card">
+          <img src="assets/office-workstation.png" alt="Office workstation with storage cabinets and shelves" loading="lazy" />
+          <div class="work-card-content">
+            <h3>Workstations &amp; storage</h3>
+            <p>Work surfaces, cabinets and shelves planned together to keep everyday work organised.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact-section" id="office-enquiry" aria-labelledby="office-enquiry-heading">
+      <h2 id="office-enquiry-heading">Request an office furniture quote</h2>
+      <p>Share your contact details and project site location so we can understand where the work is needed. Your enquiry will open in WhatsApp for you to review and send.</p>
+      <form class="enquiry-form" id="office-enquiry-form">
+        <div class="form-field">
+          <label for="office-customer-name">Name *</label>
+          <input id="office-customer-name" name="name" type="text" autocomplete="name" placeholder="Enter your name" required />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-phone">Mobile number *</label>
+          <input id="office-customer-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="\+?[0-9]{10,13}" placeholder="Enter your mobile number" required />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-address">Project site address / area *</label>
+          <input id="office-customer-address" name="address" type="text" autocomplete="street-address" placeholder="House or flat, street, area or locality" required />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-landmark">Nearby landmark (optional)</label>
+          <input id="office-customer-landmark" name="landmark" type="text" placeholder="Enter a nearby landmark" />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-city">City or town *</label>
+          <input id="office-customer-city" name="city" type="text" autocomplete="address-level2" placeholder="Enter your city or town" required />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-state">State or Union Territory *</label>
+          <input id="office-customer-state" name="state" type="text" autocomplete="address-level1" placeholder="Enter your state or UT" required />
+        </div>
+        <div class="form-field">
+          <label for="office-customer-pincode">PIN code *</label>
+          <input id="office-customer-pincode" name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[1-9][0-9]{5}" maxlength="6" placeholder="6-digit PIN code" required />
+        </div>
+        <div class="form-field full-width">
+          <label for="office-project-details">Project details (optional)</label>
+          <textarea id="office-project-details" name="details" placeholder="Tell us what you need, how many desks or workstations, and any approximate measurements."></textarea>
+        </div>
+        <button class="button" type="submit">Send office enquiry on WhatsApp</button>
+        <p class="form-note">WhatsApp will open with your enquiry. Review the message and tap Send to submit it.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© Dharmendra Carpenter · Office furniture and custom workstations</span>
+      <a href="firstweb.html">Return to the main website</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("office-enquiry-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const message = [
+        "Office furniture and workstation enquiry",
+        `Name: ${formData.get("name")}`,
+        `Mobile number: ${formData.get("phone")}`,
+        `Project site address / area: ${formData.get("address")}`,
+        formData.get("landmark") ? `Nearby landmark: ${formData.get("landmark")}` : "",
+        `City or town: ${formData.get("city")}`,
+        `State or Union Territory: ${formData.get("state")}`,
+        `PIN code: ${formData.get("pincode")}`,
+        formData.get("details") ? `Project details: ${formData.get("details")}` : ""
+      ].join("\n");
+      const whatsappUrl = `https://wa.me/917002053060?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
